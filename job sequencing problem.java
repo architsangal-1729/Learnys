@@ -1,17 +1,19 @@
-                  // not syntactically correct and not compiled properly check and make corrections before using this code //
 class Solution
 {
     int[] JobScheduling(Job arr[], int n)
     {
-        Arrays.sort(arr,Collections.reverseOrder());
+         Arrays.sort(arr, new Comparator<Job>() {
+            public int compare(Job j1, Job j2) {
+                return j2.profit - j1.profit;
+            }
+        });
         
         boolean [] slots = new boolean[n];
-        for(int i=0;i<n;i++){
-            slots[i]=false;
-        }
+        Arrays.fill(slots,false);
+        
         int count=0,maxProfit=0;
         for(int i=0;i<n;i++){
-            for(int j=Math.min(arr[i].deadline,n)-1;j>0;j--){
+            for(int j=Math.min(arr[i].deadline,n)-1;j>=0;j--){
                 if(slots[j]==false) {
                     slots[j]=true;
                     count++;
@@ -36,3 +38,4 @@ class Job {
         this.profit = z; 
     }
 }
+*/
